@@ -1,0 +1,1233 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Cafuné Alaciados by Mich</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Figtree:wght@300;400;500;600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<script>
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "palette": "cream",
+  "heroStyle": "editorial",
+  "showPrices": true,
+  "showInstagramRail": true
+}/*EDITMODE-END*/;
+</script>
+<style>
+  :root {
+    /* Cream (default) */
+    --bg: #F4ECE2;
+    --bg-deep: #EADFCF;
+    --ink: #2A1F1A;
+    --ink-soft: #5A4A40;
+    --ink-mute: #8A7568;
+    --accent: #9E6B45;     /* bronze */
+    --accent-deep: #6E4829;
+    --rose: #E5C3B1;
+    --line: rgba(42,31,26,.14);
+    --paper: #FBF6EF;
+  }
+  [data-palette="rose"] {
+    --bg: #F3E4DC;
+    --bg-deep: #E8CFC2;
+    --ink: #3A1F22;
+    --ink-soft: #6B3E3F;
+    --ink-mute: #9A6D6A;
+    --accent: #B26B65;
+    --accent-deep: #7E3F3B;
+    --rose: #EBB7A8;
+    --line: rgba(58,31,34,.14);
+    --paper: #FAEDE5;
+  }
+  [data-palette="mocha"] {
+    --bg: #231A15;
+    --bg-deep: #1A130F;
+    --ink: #F6EBDD;
+    --ink-soft: #D9C5B2;
+    --ink-mute: #A08B78;
+    --accent: #D7A87A;
+    --accent-deep: #B07F4E;
+    --rose: #C88F74;
+    --line: rgba(246,235,221,.15);
+    --paper: #2C2019;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Figtree', system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  .serif { font-family: 'DM Serif Display', 'Times New Roman', serif; font-weight: 400; }
+  .script { font-family: 'Caveat', cursive; }
+  .container { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+  .container-wide { max-width: 1440px; margin: 0 auto; padding: 0 32px; }
+  img { display: block; max-width: 100%; }
+
+  /* ---------- NAV ---------- */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(10px);
+    background: color-mix(in oklab, var(--bg) 85%, transparent);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 0;
+  }
+  .logo { display: flex; align-items: baseline; gap: 8px; text-decoration: none; color: var(--ink); }
+  .logo .mark { font-family: 'DM Serif Display', serif; font-size: 26px; letter-spacing: -0.01em; font-style: italic; }
+  .logo .sub { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--ink-mute); }
+  .nav-links { display: flex; gap: 36px; font-size: 13.5px; letter-spacing: 0.04em; }
+  .nav-links a { color: var(--ink-soft); text-decoration: none; transition: color .2s; }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 20px; border-radius: 999px;
+    background: var(--ink); color: var(--bg);
+    font-size: 13px; letter-spacing: 0.04em; font-weight: 500;
+    text-decoration: none; transition: transform .15s, background .2s;
+  }
+  .nav-cta:hover { background: var(--accent-deep); transform: translateY(-1px); }
+  @media (max-width: 820px) {
+    .nav-links { display: none; }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    padding: 40px 0 80px;
+    overflow: hidden;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+  .eyebrow .dot { width: 5px; height: 5px; background: var(--accent); border-radius: 999px; }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(56px, 8vw, 112px);
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+    margin: 24px 0 0;
+    color: var(--ink);
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+  }
+  .hero .script-tag {
+    font-family: 'Caveat', cursive;
+    font-size: 34px;
+    color: var(--accent);
+    display: inline-block;
+    transform: rotate(-3deg);
+    margin-left: 4px;
+  }
+  .hero-sub {
+    margin-top: 28px;
+    font-size: 17px;
+    color: var(--ink-soft);
+    max-width: 480px;
+    line-height: 1.6;
+  }
+  .hero-cta-row { display: flex; gap: 14px; margin-top: 36px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 16px 26px; border-radius: 999px;
+    font-size: 14px; font-weight: 500; letter-spacing: 0.03em;
+    text-decoration: none; cursor: pointer; border: 0;
+    transition: transform .15s, background .2s, color .2s;
+  }
+  .btn-primary { background: var(--ink); color: var(--bg); }
+  .btn-primary:hover { background: var(--accent-deep); transform: translateY(-1px); }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+  .btn-ghost:hover { border-color: var(--ink); }
+
+  .hero-meta {
+    margin-top: 48px;
+    display: flex; gap: 40px; flex-wrap: wrap;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+  }
+  .meta-item .num { font-family: 'DM Serif Display', serif; font-size: 30px; color: var(--ink); line-height: 1; }
+  .meta-item .lbl { font-size: 12px; letter-spacing: 0.08em; color: var(--ink-mute); text-transform: uppercase; margin-top: 6px; }
+
+  /* Hero visual — portrait collage */
+  .hero-visual { position: relative; aspect-ratio: 4/5; }
+  .hero-photo {
+    position: absolute;
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--bg-deep);
+    box-shadow: 0 30px 60px -30px rgba(42,31,26,0.35);
+  }
+  .hero-photo.main {
+    inset: 0 10% 12% 0;
+  }
+  .hero-photo.sub {
+    width: 42%; aspect-ratio: 3/4;
+    right: 0; bottom: 0;
+    border: 8px solid var(--bg);
+  }
+  .photo-ph {
+    width: 100%; height: 100%;
+    display: flex; align-items: flex-end; justify-content: flex-start;
+    padding: 18px;
+    color: color-mix(in oklab, var(--ink) 50%, var(--bg));
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  }
+  .photo-ph.p1 { background:
+    radial-gradient(circle at 30% 20%, color-mix(in oklab, var(--rose) 70%, transparent), transparent 55%),
+    linear-gradient(135deg, color-mix(in oklab, var(--accent) 40%, var(--bg-deep)) 0%, var(--bg-deep) 100%);
+  }
+  .photo-ph.p2 { background:
+    radial-gradient(circle at 70% 70%, color-mix(in oklab, var(--accent) 50%, transparent), transparent 60%),
+    linear-gradient(160deg, var(--bg-deep) 0%, color-mix(in oklab, var(--ink) 20%, var(--bg-deep)) 100%);
+  }
+
+  .hero-stamp {
+    position: absolute;
+    right: -10px; top: 40px;
+    width: 110px; height: 110px;
+    border-radius: 50%;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    display: grid; place-items: center;
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    background: var(--bg);
+    animation: spin 24s linear infinite;
+  }
+  .hero-stamp svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ---------- MARQUEE ---------- */
+  .marquee {
+    overflow: hidden;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 22px 0;
+    background: var(--paper);
+  }
+  .marquee-track {
+    display: flex; gap: 60px;
+    animation: marquee 40s linear infinite;
+    white-space: nowrap;
+  }
+  .marquee span {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px; font-style: italic;
+    color: var(--ink-soft);
+    display: inline-flex; align-items: center; gap: 60px;
+  }
+  .marquee span::after { content: "✦"; color: var(--accent); font-style: normal; }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+
+  /* ---------- SECTION GENERIC ---------- */
+  section { padding: 100px 0; }
+  .section-head {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    gap: 40px; margin-bottom: 56px;
+  }
+  .section-head h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(42px, 5vw, 64px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin: 12px 0 0;
+    max-width: 780px;
+  }
+  .section-head h2 em { font-style: italic; color: var(--accent); }
+  .section-head p { max-width: 360px; color: var(--ink-soft); font-size: 15px; line-height: 1.6; margin: 0; }
+
+  /* ---------- MEANING / ABOUT ---------- */
+  .meaning {
+    background: var(--paper);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .meaning-inner {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  @media (max-width: 900px) { .meaning-inner { grid-template-columns: 1fr; gap: 40px; } }
+  .meaning-word {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: clamp(80px, 12vw, 180px);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    position: relative;
+  }
+  .meaning-word::after {
+    content: "n. f. · portugués";
+    display: block;
+    font-family: 'Figtree', sans-serif;
+    font-style: normal;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-top: 20px;
+  }
+  .meaning-def { font-size: 20px; color: var(--ink-soft); line-height: 1.55; max-width: 520px; }
+  .meaning-def strong { color: var(--ink); font-weight: 500; }
+
+  /* ---------- SERVICES ---------- */
+  .services {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  @media (max-width: 780px) { .services { grid-template-columns: 1fr; } }
+  .service {
+    background: var(--bg);
+    padding: 40px 36px;
+    display: flex; flex-direction: column; gap: 18px;
+    transition: background .3s;
+    cursor: pointer;
+    position: relative;
+  }
+  .service:hover { background: var(--paper); }
+  .service-num {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--accent);
+  }
+  .service h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 34px;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .service p { margin: 0; color: var(--ink-soft); font-size: 15px; max-width: 420px; }
+  .service-foot {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: auto; padding-top: 24px;
+    border-top: 1px dashed var(--line);
+    font-size: 13px;
+  }
+  .service-price { color: var(--ink); font-weight: 500; }
+  .service-dur { color: var(--ink-mute); letter-spacing: 0.04em; }
+  .service-arrow { color: var(--accent); font-size: 18px; }
+
+  /* ---------- PROCESS ---------- */
+  .process-wrap { background: var(--ink); color: var(--bg); }
+  [data-palette="mocha"] .process-wrap { background: var(--paper); }
+  .process-head h2 { color: var(--bg); }
+  [data-palette="mocha"] .process-head h2 { color: var(--ink); }
+  .process-head p { color: color-mix(in oklab, var(--bg) 70%, var(--ink)); }
+
+  .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+  @media (max-width: 900px) { .process-steps { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 540px) { .process-steps { grid-template-columns: 1fr; } }
+  .step {
+    padding: 32px 28px;
+    border-right: 1px solid color-mix(in oklab, var(--bg) 20%, transparent);
+    border-top: 1px solid color-mix(in oklab, var(--bg) 20%, transparent);
+  }
+  .step:last-child { border-right: 0; }
+  .step .n {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 44px;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .step h4 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    margin: 20px 0 10px;
+    letter-spacing: -0.01em;
+    color: var(--bg);
+  }
+  [data-palette="mocha"] .step h4 { color: var(--ink); }
+  .step p {
+    font-size: 14px; line-height: 1.55;
+    color: color-mix(in oklab, var(--bg) 65%, var(--ink));
+    margin: 0;
+  }
+
+  /* ---------- GALLERY ---------- */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: 80px;
+    gap: 14px;
+  }
+  @media (max-width: 820px) {
+    .gallery-grid { grid-template-columns: repeat(6, 1fr); grid-auto-rows: 60px; }
+  }
+  .tile {
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--bg-deep);
+  }
+  .tile .ba {
+    position: absolute; left: 14px; top: 14px;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 6px 10px; border-radius: 999px;
+    font-weight: 500;
+  }
+  .tile .cap {
+    position: absolute; left: 14px; bottom: 14px;
+    color: var(--bg); font-size: 12px; font-style: italic;
+    font-family: 'DM Serif Display', serif;
+  }
+  .tile.t1 { grid-column: span 5; grid-row: span 5; background:
+    radial-gradient(circle at 40% 30%, color-mix(in oklab, var(--rose) 60%, transparent), transparent 55%),
+    linear-gradient(135deg, var(--bg-deep), color-mix(in oklab, var(--accent) 30%, var(--bg-deep)));
+  }
+  .tile.t2 { grid-column: span 4; grid-row: span 3; background:
+    linear-gradient(160deg, color-mix(in oklab, var(--accent) 45%, var(--bg-deep)), var(--bg-deep));
+  }
+  .tile.t3 { grid-column: span 3; grid-row: span 3; background:
+    radial-gradient(circle at 70% 60%, color-mix(in oklab, var(--rose) 80%, transparent), var(--bg-deep));
+  }
+  .tile.t4 { grid-column: span 4; grid-row: span 2; background:
+    linear-gradient(120deg, color-mix(in oklab, var(--ink) 15%, var(--bg-deep)), var(--bg-deep));
+  }
+  .tile.t5 { grid-column: span 3; grid-row: span 4; background:
+    radial-gradient(circle at 30% 70%, color-mix(in oklab, var(--accent) 50%, transparent), transparent),
+    linear-gradient(180deg, var(--bg-deep), color-mix(in oklab, var(--ink) 20%, var(--bg-deep)));
+  }
+  .tile.t6 { grid-column: span 5; grid-row: span 3; background:
+    linear-gradient(45deg, color-mix(in oklab, var(--rose) 50%, var(--bg-deep)), color-mix(in oklab, var(--accent) 30%, var(--bg-deep)));
+  }
+  @media (max-width: 820px) {
+    .tile.t1 { grid-column: span 6; grid-row: span 4; }
+    .tile.t2 { grid-column: span 3; grid-row: span 3; }
+    .tile.t3 { grid-column: span 3; grid-row: span 3; }
+    .tile.t4 { grid-column: span 6; grid-row: span 2; }
+    .tile.t5 { grid-column: span 3; grid-row: span 3; }
+    .tile.t6 { grid-column: span 3; grid-row: span 3; }
+  }
+
+  /* ---------- ABOUT MICH ---------- */
+  .mich {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px; align-items: center;
+  }
+  @media (max-width: 900px) { .mich { grid-template-columns: 1fr; } }
+  .mich-portrait {
+    aspect-ratio: 4/5;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    background:
+      radial-gradient(circle at 60% 40%, color-mix(in oklab, var(--rose) 70%, transparent), transparent 55%),
+      linear-gradient(160deg, color-mix(in oklab, var(--accent) 40%, var(--bg-deep)), var(--bg-deep));
+  }
+  .mich-sig {
+    position: absolute; right: 20px; bottom: 20px;
+    font-family: 'Caveat', cursive; font-size: 56px; color: var(--bg);
+    transform: rotate(-6deg);
+  }
+  .mich h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin: 16px 0 24px;
+  }
+  .mich h2 em { font-style: italic; color: var(--accent); }
+  .mich-lead { font-size: 18px; color: var(--ink-soft); line-height: 1.6; }
+  .mich-body { margin-top: 20px; color: var(--ink-soft); line-height: 1.7; }
+  .mich-creds {
+    display: flex; gap: 40px; flex-wrap: wrap;
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+  }
+  .cred .lbl { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-mute); }
+  .cred .val { font-family: 'DM Serif Display', serif; font-size: 22px; margin-top: 4px; }
+
+  /* ---------- TESTIMONIALS ---------- */
+  .testi-wrap { background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 900px) { .testi-grid { grid-template-columns: 1fr; } }
+  .testi {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 32px;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  .testi .stars { color: var(--accent); letter-spacing: 2px; font-size: 14px; }
+  .testi blockquote {
+    margin: 0;
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .testi blockquote::before { content: "“"; color: var(--accent); margin-right: 2px; }
+  .testi blockquote::after { content: "”"; color: var(--accent); }
+  .testi-foot {
+    display: flex; align-items: center; gap: 12px;
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+  .avatar {
+    width: 40px; height: 40px; border-radius: 999px;
+    background: linear-gradient(135deg, var(--rose), var(--accent));
+    display: grid; place-items: center;
+    color: var(--bg); font-weight: 600; font-size: 14px;
+  }
+  .testi-who .n { font-weight: 500; font-size: 14px; }
+  .testi-who .s { font-size: 12px; color: var(--ink-mute); margin-top: 2px; }
+
+  /* ---------- FAQ ---------- */
+  .faq-grid {
+    display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px;
+  }
+  @media (max-width: 900px) { .faq-grid { grid-template-columns: 1fr; gap: 30px; } }
+  .faq-list { border-top: 1px solid var(--line); }
+  .faq-item { border-bottom: 1px solid var(--line); }
+  .faq-q {
+    width: 100%; text-align: left;
+    background: transparent; border: 0;
+    padding: 24px 0;
+    display: flex; justify-content: space-between; align-items: center; gap: 24px;
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--ink);
+    cursor: pointer;
+    letter-spacing: -0.01em;
+  }
+  .faq-q .plus { color: var(--accent); font-size: 20px; transition: transform .3s; }
+  .faq-item.open .faq-q .plus { transform: rotate(45deg); }
+  .faq-a {
+    max-height: 0; overflow: hidden;
+    transition: max-height .35s ease;
+    color: var(--ink-soft); font-size: 15.5px; line-height: 1.65;
+  }
+  .faq-a-inner { padding: 0 0 24px; max-width: 620px; }
+
+  /* ---------- BOOKING / CTA ---------- */
+  .book-wrap {
+    background: var(--ink); color: var(--bg);
+    position: relative;
+    overflow: hidden;
+  }
+  [data-palette="mocha"] .book-wrap { background: var(--bg-deep); }
+  .book-wrap::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 80% 20%, color-mix(in oklab, var(--accent) 30%, transparent), transparent 40%),
+      radial-gradient(circle at 10% 90%, color-mix(in oklab, var(--rose) 30%, transparent), transparent 40%);
+    pointer-events: none;
+  }
+  .book-grid {
+    position: relative;
+    display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px;
+    align-items: center;
+  }
+  @media (max-width: 900px) { .book-grid { grid-template-columns: 1fr; gap: 50px; } }
+  .book-wrap h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(48px, 6vw, 84px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin: 0;
+    color: var(--bg);
+  }
+  [data-palette="mocha"] .book-wrap h2 { color: var(--ink); }
+  .book-wrap h2 em { font-style: italic; color: var(--accent); }
+  .book-sub {
+    margin-top: 20px; font-size: 17px;
+    color: color-mix(in oklab, var(--bg) 75%, var(--ink));
+    max-width: 460px; line-height: 1.55;
+  }
+  .book-card {
+    background: color-mix(in oklab, var(--bg) 10%, transparent);
+    border: 1px solid color-mix(in oklab, var(--bg) 25%, transparent);
+    border-radius: 8px;
+    padding: 36px;
+    backdrop-filter: blur(6px);
+  }
+  [data-palette="mocha"] .book-card { background: var(--paper); border-color: var(--line); }
+  .book-card .label {
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: color-mix(in oklab, var(--bg) 70%, var(--ink));
+    margin-bottom: 10px;
+  }
+  .book-wa {
+    display: flex; align-items: center; gap: 16px;
+    padding: 18px 20px;
+    background: var(--bg); color: var(--ink);
+    border-radius: 6px;
+    text-decoration: none;
+    transition: transform .15s;
+    margin-bottom: 16px;
+  }
+  .book-wa:hover { transform: translateY(-2px); }
+  .book-wa .icon {
+    width: 44px; height: 44px; border-radius: 999px;
+    background: var(--accent); color: var(--bg);
+    display: grid; place-items: center; flex-shrink: 0;
+  }
+  .book-wa .t1 { font-family: 'DM Serif Display', serif; font-size: 20px; letter-spacing: -0.01em; }
+  .book-wa .t2 { font-size: 13px; color: var(--ink-mute); margin-top: 2px; }
+  .book-wa .go { margin-left: auto; color: var(--ink-mute); }
+
+  .book-info-row { display: flex; gap: 16px; margin-top: 14px; }
+  .book-info {
+    flex: 1;
+    padding: 14px 16px;
+    border: 1px solid color-mix(in oklab, var(--bg) 22%, transparent);
+    border-radius: 6px;
+    font-size: 13px;
+  }
+  [data-palette="mocha"] .book-info { border-color: var(--line); }
+  .book-info .t1 { color: color-mix(in oklab, var(--bg) 65%, var(--ink)); letter-spacing: 0.08em; text-transform: uppercase; font-size: 10px; }
+  [data-palette="mocha"] .book-info .t1 { color: var(--ink-mute); }
+  .book-info .t2 { color: var(--bg); margin-top: 4px; font-size: 14px; }
+  [data-palette="mocha"] .book-info .t2 { color: var(--ink); }
+
+  /* ---------- INSTAGRAM RAIL ---------- */
+  .ig-rail { padding: 60px 0 100px; background: var(--paper); border-top: 1px solid var(--line); }
+  .ig-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 24px;
+  }
+  .ig-head h3 { font-family: 'DM Serif Display', serif; font-size: 28px; margin: 0; font-style: italic; }
+  .ig-head a { color: var(--accent); font-size: 14px; text-decoration: none; letter-spacing: 0.04em; }
+  .ig-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+  @media (max-width: 820px) { .ig-grid { grid-template-columns: repeat(3, 1fr); } }
+  .ig-item {
+    aspect-ratio: 1;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .ig-item:nth-child(1) { background: linear-gradient(135deg, color-mix(in oklab, var(--rose) 70%, var(--bg-deep)), var(--bg-deep)); }
+  .ig-item:nth-child(2) { background: linear-gradient(45deg, color-mix(in oklab, var(--accent) 50%, var(--bg-deep)), var(--bg-deep)); }
+  .ig-item:nth-child(3) { background: linear-gradient(180deg, var(--bg-deep), color-mix(in oklab, var(--ink) 25%, var(--bg-deep))); }
+  .ig-item:nth-child(4) { background: radial-gradient(circle at 40% 40%, color-mix(in oklab, var(--rose) 80%, transparent), var(--bg-deep)); }
+  .ig-item:nth-child(5) { background: linear-gradient(225deg, color-mix(in oklab, var(--accent) 60%, var(--bg-deep)), var(--bg-deep)); }
+  .ig-item:nth-child(6) { background: linear-gradient(135deg, var(--bg-deep), color-mix(in oklab, var(--rose) 60%, var(--bg-deep))); }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: var(--bg);
+    padding: 60px 0 30px;
+    border-top: 1px solid var(--line);
+  }
+  .foot-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; }
+  @media (max-width: 820px) { .foot-grid { grid-template-columns: 1fr 1fr; gap: 30px; } }
+  .foot-brand .mark { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 34px; }
+  .foot-brand p { color: var(--ink-soft); font-size: 14px; max-width: 300px; margin-top: 12px; }
+  .foot-col h5 { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-mute); margin: 0 0 16px; font-weight: 500; }
+  .foot-col a { display: block; color: var(--ink-soft); text-decoration: none; font-size: 14px; padding: 6px 0; }
+  .foot-col a:hover { color: var(--accent); }
+  .foot-bottom {
+    margin-top: 50px; padding-top: 24px;
+    border-top: 1px solid var(--line);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    font-size: 12px; color: var(--ink-mute);
+    letter-spacing: 0.04em;
+  }
+
+  /* ---------- TWEAKS PANEL ---------- */
+  .tweaks {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    z-index: 100;
+    width: 280px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    box-shadow: 0 20px 50px -20px rgba(0,0,0,0.25);
+    padding: 18px;
+    font-family: 'Figtree', sans-serif;
+    display: none;
+  }
+  .tweaks.open { display: block; }
+  .tweaks h4 { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 20px; margin: 0 0 4px; }
+  .tweaks .hint { font-size: 11px; color: var(--ink-mute); margin-bottom: 14px; }
+  .tweaks .row { margin-bottom: 14px; }
+  .tweaks .row > label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); display: block; margin-bottom: 6px; }
+  .swatches { display: flex; gap: 8px; }
+  .swatch {
+    flex: 1; border: 1px solid var(--line); border-radius: 6px;
+    padding: 8px 6px; cursor: pointer;
+    display: flex; flex-direction: column; gap: 6px; align-items: center;
+    font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+    background: transparent;
+    transition: border-color .2s;
+  }
+  .swatch.active { border-color: var(--ink); }
+  .swatch .dots { display: flex; gap: 2px; }
+  .swatch .dots span { width: 10px; height: 10px; border-radius: 999px; border: 1px solid rgba(0,0,0,0.1); }
+  .tweak-toggle {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 13px; color: var(--ink-soft);
+  }
+  .switch { position: relative; width: 36px; height: 20px; background: var(--bg-deep); border-radius: 999px; cursor: pointer; transition: background .2s; }
+  .switch.on { background: var(--accent); }
+  .switch::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 999px; background: var(--bg); transition: transform .2s; }
+  .switch.on::after { transform: translateX(16px); }
+
+  /* Utility fade-in */
+  .fade-up { opacity: 0; transform: translateY(18px); transition: opacity .8s, transform .8s; }
+  .fade-up.in { opacity: 1; transform: none; }
+</style>
+</head>
+<body data-palette="cream">
+
+<!-- NAV -->
+<nav class="nav" data-screen-label="Nav">
+  <div class="container nav-inner">
+    <a href="#top" class="logo">
+      <span class="mark">Cafuné</span>
+      <span class="sub">Alaciados by Mich</span>
+    </a>
+    <div class="nav-links">
+      <a href="#servicios">Servicios</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#galeria">Galería</a>
+      <a href="#mich">Sobre Mich</a>
+      <a href="#faq">Preguntas</a>
+    </div>
+    <a class="nav-cta" href="#agenda">
+      Agendar cita
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top" data-screen-label="01 Hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow"><span class="dot"></span>Salón especializado en alaciados</span>
+      <h1>
+        Cabello <em>sedoso</em>,<br>
+        cuidado con <em>cariño</em>.
+        <span class="script-tag">por Mich ✦</span>
+      </h1>
+      <p class="hero-sub">
+        Cafuné es esa caricia suave que pasa los dedos por el cabello. Así tratamos el tuyo: con técnica profesional, productos premium y el mimo que mereces. Resultados que duran meses, sin formol.
+      </p>
+      <div class="hero-cta-row">
+        <a class="btn btn-primary" href="#agenda">
+          Reservar por WhatsApp
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.2s-.8 1-.9 1.2c-.2.2-.3.2-.6.1s-1.3-.5-2.4-1.5c-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5s-.7-1.7-1-2.3c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.3 5.1 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.5-.3zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.2-1.3c1.4.8 3.1 1.2 4.8 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="#servicios">Ver servicios</a>
+      </div>
+      <div class="hero-meta">
+        <div class="meta-item">
+          <div class="num">+500</div>
+          <div class="lbl">Clientas felices</div>
+        </div>
+        <div class="meta-item">
+          <div class="num">7 años</div>
+          <div class="lbl">De experiencia</div>
+        </div>
+        <div class="meta-item">
+          <div class="num">0%</div>
+          <div class="lbl">Formol</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-photo main"><div class="photo-ph p1">Foto — clienta · resultado</div></div>
+      <div class="hero-photo sub"><div class="photo-ph p2">Detalle</div></div>
+      <div class="hero-stamp">
+        <svg viewBox="0 0 110 110">
+          <defs>
+            <path id="circlePath" d="M 55,55 m -44,0 a 44,44 0 1,1 88,0 a 44,44 0 1,1 -88,0"/>
+          </defs>
+          <text font-size="9" letter-spacing="2" fill="currentColor" font-family="Figtree">
+            <textPath href="#circlePath">✦ SIN FORMOL · RESULTADOS GARANTIZADOS · HECHO CON CARIÑO </textPath>
+          </text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Alaciado progresivo</span><span>Botox capilar</span><span>Nanoplastia</span><span>Hidratación profunda</span><span>Color & mechas</span><span>Cortes con forma</span>
+    <span>Alaciado progresivo</span><span>Botox capilar</span><span>Nanoplastia</span><span>Hidratación profunda</span><span>Color & mechas</span><span>Cortes con forma</span>
+  </div>
+</div>
+
+<!-- MEANING -->
+<section class="meaning" data-screen-label="02 Significado">
+  <div class="container meaning-inner">
+    <div class="meaning-word">Cafuné</div>
+    <div>
+      <p class="meaning-def">
+        <strong>/ka·fu·né/</strong> — El acto de pasar los dedos con ternura por el cabello de alguien que amas. Una palabra portuguesa sin traducción exacta, que describe un gesto íntimo de cuidado.
+      </p>
+      <p class="meaning-def" style="margin-top:20px;">
+        Esa es la filosofía del salón: cada cita es un momento de pausa, dedicado por completo a ti y a tu cabello.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios" data-screen-label="03 Servicios">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow"><span class="dot"></span>Servicios</span>
+        <h2>Tratamientos <em>a la medida</em><br>de tu cabello.</h2>
+      </div>
+      <p>Cada cabello es único. Evaluamos porosidad, tipo de rizo y tu historial antes de recomendarte el tratamiento ideal.</p>
+    </div>
+
+    <div class="services">
+      <div class="service">
+        <div class="service-num">01</div>
+        <h3>Alaciado<br>progresivo</h3>
+        <p>Nuestro servicio insignia. Elimina el frizz, alisa el cabello y devuelve el brillo. Dura de 4 a 6 meses sin decolorar.</p>
+        <div class="service-foot">
+          <span class="service-price">desde $1,800 MXN</span>
+          <span class="service-dur">3 – 4 HRS</span>
+          <span class="service-arrow">→</span>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-num">02</div>
+        <h3>Botox capilar</h3>
+        <p>Reconstrucción profunda para cabellos dañados, decolorados o quebradizos. Recupera elasticidad y brillo.</p>
+        <div class="service-foot">
+          <span class="service-price">desde $1,200 MXN</span>
+          <span class="service-dur">2 HRS</span>
+          <span class="service-arrow">→</span>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-num">03</div>
+        <h3>Nanoplastia</h3>
+        <p>Alaciado orgánico libre de formol. Ideal para cabellos finos o con procesos químicos previos.</p>
+        <div class="service-foot">
+          <span class="service-price">desde $2,200 MXN</span>
+          <span class="service-dur">3 HRS</span>
+          <span class="service-arrow">→</span>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-num">04</div>
+        <h3>Hidratación<br>profunda</h3>
+        <p>Mantenimiento ideal entre tratamientos. Mascarillas premium con keratina, argán y aceites nutritivos.</p>
+        <div class="service-foot">
+          <span class="service-price">desde $600 MXN</span>
+          <span class="service-dur">1 HR</span>
+          <span class="service-arrow">→</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<div class="process-wrap" id="proceso" data-screen-label="04 Proceso">
+  <section class="container">
+    <div class="section-head process-head">
+      <div>
+        <span class="eyebrow"><span class="dot"></span>Cómo trabajamos</span>
+        <h2>El <em>ritual</em> Cafuné.</h2>
+      </div>
+      <p>Cuatro pasos pensados para que salgas con el cabello de tus sueños — y queriendo volver.</p>
+    </div>
+    <div class="process-steps">
+      <div class="step">
+        <div class="n">01</div>
+        <h4>Diagnóstico</h4>
+        <p>Conversamos sobre tu historial, tus hábitos y lo que buscas. Analizamos hebra por hebra.</p>
+      </div>
+      <div class="step">
+        <div class="n">02</div>
+        <h4>Preparación</h4>
+        <p>Lavado profundo con shampoo clarificante y revisión de porosidad para elegir la fórmula ideal.</p>
+      </div>
+      <div class="step">
+        <div class="n">03</div>
+        <h4>Tratamiento</h4>
+        <p>Aplicación mecha por mecha, con tiempos precisos de sellado y planchado a temperatura controlada.</p>
+      </div>
+      <div class="step">
+        <div class="n">04</div>
+        <h4>Cuidado en casa</h4>
+        <p>Sales con un kit de cuidados y una guía personal para mantener el resultado por meses.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- GALERIA -->
+<section id="galeria" data-screen-label="05 Galería">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow"><span class="dot"></span>Antes & después</span>
+        <h2>Transformaciones <em>reales</em>.</h2>
+      </div>
+      <p>Cabellos diferentes, un mismo resultado: brillo, suavidad y movimiento. Sin filtros.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="tile t1"><span class="ba">Antes / Después</span><span class="cap">Alaciado progresivo · Paola</span></div>
+      <div class="tile t2"><span class="ba">Resultado</span><span class="cap">Botox capilar</span></div>
+      <div class="tile t3"><span class="ba">Detalle</span><span class="cap">Brillo natural</span></div>
+      <div class="tile t4"><span class="ba">Proceso</span><span class="cap">En el salón</span></div>
+      <div class="tile t5"><span class="ba">Antes / Después</span><span class="cap">Nanoplastia · Dani</span></div>
+      <div class="tile t6"><span class="ba">Resultado</span><span class="cap">Hidratación profunda</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- MICH -->
+<section id="mich" style="background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);" data-screen-label="06 Sobre Mich">
+  <div class="container mich">
+    <div class="mich-portrait">
+      <div class="photo-ph" style="background: transparent;"></div>
+      <div class="mich-sig">— Mich</div>
+    </div>
+    <div>
+      <span class="eyebrow"><span class="dot"></span>Sobre Mich</span>
+      <h2>Manos que <em>escuchan</em> el cabello.</h2>
+      <p class="mich-lead">
+        Soy Michelle — Mich para las clientas que ya son amigas. Llevo siete años dedicada exclusivamente a los tratamientos de alaciado y reconstrucción capilar.
+      </p>
+      <p class="mich-body">
+        Estudié en México y me certifiqué en técnicas brasileñas y coreanas. Cafuné nació porque sentí que faltaba un espacio donde el tratamiento fuera serio y honesto, pero también cálido — donde supieras qué entra en tu cabello y por qué. Aquí no vendo alaciado por vender: si tu cabello no lo necesita, te lo digo.
+      </p>
+      <div class="mich-creds">
+        <div class="cred">
+          <div class="lbl">Formación</div>
+          <div class="val">Cadiveu · Inoar</div>
+        </div>
+        <div class="cred">
+          <div class="lbl">Especialidad</div>
+          <div class="val">Sin formol</div>
+        </div>
+        <div class="cred">
+          <div class="lbl">Desde</div>
+          <div class="val">2019</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<div class="testi-wrap" data-screen-label="07 Testimonios">
+  <section class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow"><span class="dot"></span>Testimonios</span>
+        <h2>Lo que dicen las <em>clientas</em>.</h2>
+      </div>
+      <p>Más de 500 reseñas entre Google, Instagram y recomendaciones de boca en boca.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi">
+        <div class="stars">★★★★★</div>
+        <blockquote>Llevaba años probando alaciados y nunca había sentido mi cabello tan suave. Mich explica todo y se nota que le importa el resultado.</blockquote>
+        <div class="testi-foot">
+          <div class="avatar">PA</div>
+          <div class="testi-who"><div class="n">Paola A.</div><div class="s">Clienta desde 2023</div></div>
+        </div>
+      </div>
+      <div class="testi">
+        <div class="stars">★★★★★</div>
+        <blockquote>El lugar es hermoso, puntual y te sientes cuidada. Mi cabello aguantó más de cinco meses increíble. Ya agendé de nuevo.</blockquote>
+        <div class="testi-foot">
+          <div class="avatar">DM</div>
+          <div class="testi-who"><div class="n">Daniela M.</div><div class="s">Google reviews</div></div>
+        </div>
+      </div>
+      <div class="testi">
+        <div class="stars">★★★★★</div>
+        <blockquote>Tenía miedo por mi cabello teñido pero Mich me recomendó nanoplastia en vez de alaciado — salí fascinada. Totalmente honesta.</blockquote>
+        <div class="testi-foot">
+          <div class="avatar">RG</div>
+          <div class="testi-who"><div class="n">Regina G.</div><div class="s">Instagram</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- FAQ -->
+<section id="faq" data-screen-label="08 FAQ">
+  <div class="container">
+    <div class="faq-grid">
+      <div>
+        <span class="eyebrow"><span class="dot"></span>Preguntas</span>
+        <h2 style="font-family:'DM Serif Display',serif;font-size:clamp(40px,5vw,60px);line-height:1.02;letter-spacing:-0.02em;margin:12px 0 16px;">Lo que <em style="font-style:italic;color:var(--accent);">siempre</em> me preguntan.</h2>
+        <p style="color:var(--ink-soft);font-size:15px;max-width:340px;">¿No ves tu duda aquí? Escríbeme directo por WhatsApp y te respondo yo misma.</p>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q">¿Cuánto dura un alaciado? <span class="plus">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Entre 4 y 6 meses, dependiendo del tipo de cabello y de los cuidados en casa. Al final del tratamiento te doy una guía personal para que te dure al máximo.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">¿Usan formol? <span class="plus">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">No. Todos nuestros tratamientos son libres de formol. Usamos aminoácidos, proteínas y activos vegetales que alinean el cabello sin dañarlo.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">¿Puedo hacerlo si tengo el cabello teñido o decolorado? <span class="plus">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Sí, pero necesitamos evaluar el estado del cabello. En algunos casos recomendamos botox o nanoplastia antes que alaciado para no sobreprocesar.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">¿Cuánto dura la cita? <span class="plus">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Entre 2 y 4 horas según el largo y grosor del cabello. Te recomiendo venir con tiempo libre y desayunada.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">¿Necesito cortarme antes o después? <span class="plus">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Lo ideal es un despunte antes del tratamiento para emparejar puntas. Si quieres, lo hacemos aquí mismo sin costo extra.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">¿Aceptan pago con tarjeta? <span class="plus">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Sí, aceptamos efectivo, transferencia y tarjetas de crédito/débito. También manejamos paquetes con descuento si prepagas dos sesiones.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<div class="book-wrap" id="agenda" data-screen-label="09 Agenda">
+  <section class="container">
+    <div class="book-grid">
+      <div>
+        <span class="eyebrow" style="color: color-mix(in oklab, var(--bg) 70%, var(--ink));"><span class="dot"></span>Reservar</span>
+        <h2>Nos vemos en el <em>salón</em>.</h2>
+        <p class="book-sub">
+          Escríbeme por WhatsApp y te contesto personalmente en menos de 2 horas (horario de salón). Confirmo disponibilidad, resuelvo dudas y te agendo.
+        </p>
+      </div>
+      <div class="book-card">
+        <div class="label">Agenda ahora</div>
+        <a class="book-wa" href="https://wa.me/525555555555?text=Hola%20Mich%2C%20quiero%20agendar%20una%20cita%20en%20Cafun%C3%A9%20%E2%9C%A8">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.2s-.8 1-.9 1.2c-.2.2-.3.2-.6.1s-1.3-.5-2.4-1.5c-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5s-.7-1.7-1-2.3c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.3 5.1 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.5-.3zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.2-1.3c1.4.8 3.1 1.2 4.8 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
+          </div>
+          <div>
+            <div class="t1">WhatsApp directo</div>
+            <div class="t2">+52 55 5555 5555</div>
+          </div>
+          <div class="go">→</div>
+        </a>
+        <div class="book-info-row">
+          <div class="book-info">
+            <div class="t1">Horario</div>
+            <div class="t2">Mar – Sáb · 10h – 19h</div>
+          </div>
+          <div class="book-info">
+            <div class="t1">Ubicación</div>
+            <div class="t2">CDMX · Roma Nte.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- INSTAGRAM -->
+<div class="ig-rail" id="ig" data-screen-label="10 Instagram">
+  <div class="container">
+    <div class="ig-head">
+      <h3>@cafune.alaciados</h3>
+      <a href="#">Síguenos en Instagram →</a>
+    </div>
+    <div class="ig-grid">
+      <div class="ig-item"></div>
+      <div class="ig-item"></div>
+      <div class="ig-item"></div>
+      <div class="ig-item"></div>
+      <div class="ig-item"></div>
+      <div class="ig-item"></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="mark">Cafuné</div>
+        <p>Alaciados por Mich. Cabello sedoso, cuidado con cariño. CDMX desde 2019.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Salón</h5>
+        <a href="#servicios">Servicios</a>
+        <a href="#proceso">Proceso</a>
+        <a href="#mich">Sobre Mich</a>
+        <a href="#galeria">Galería</a>
+      </div>
+      <div class="foot-col">
+        <h5>Contacto</h5>
+        <a href="https://wa.me/525555555555">WhatsApp</a>
+        <a href="#">Instagram</a>
+        <a href="/cdn-cgi/l/email-protection#e48c8b8885a4878582918a81ca899c"><span class="__cf_email__" data-cfemail="553d3a393415363433203b307b382d">[email&#160;protected]</span></a>
+      </div>
+      <div class="foot-col">
+        <h5>Visítanos</h5>
+        <a>Av. Álvaro Obregón 123</a>
+        <a>Col. Roma Norte, CDMX</a>
+        <a>Mar–Sáb · 10h–19h</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Cafuné Alaciados · Todos los derechos reservados</span>
+      <span>Hecho con cafuné ✦</span>
+    </div>
+  </div>
+</footer>
+
+<!-- TWEAKS PANEL -->
+<div class="tweaks" id="tweaks">
+  <h4>Tweaks</h4>
+  <div class="hint">Prueba diferentes estéticas</div>
+  <div class="row">
+    <label>Paleta</label>
+    <div class="swatches">
+      <button class="swatch" data-pal="cream">
+        <div class="dots"><span style="background:#F4ECE2"></span><span style="background:#9E6B45"></span><span style="background:#2A1F1A"></span></div>
+        Crema
+      </button>
+      <button class="swatch" data-pal="rose">
+        <div class="dots"><span style="background:#F3E4DC"></span><span style="background:#B26B65"></span><span style="background:#3A1F22"></span></div>
+        Rosé
+      </button>
+      <button class="swatch" data-pal="mocha">
+        <div class="dots"><span style="background:#231A15"></span><span style="background:#D7A87A"></span><span style="background:#F6EBDD"></span></div>
+        Moca
+      </button>
+    </div>
+  </div>
+  <div class="row tweak-toggle">
+    <span>Mostrar precios</span>
+    <div class="switch on" id="tw-prices"></div>
+  </div>
+  <div class="row tweak-toggle">
+    <span>Instagram rail</span>
+    <div class="switch on" id="tw-ig"></div>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Tweaks state
+  const state = { ...TWEAK_DEFAULTS };
+
+  function applyPalette(p) {
+    document.body.setAttribute('data-palette', p);
+    state.palette = p;
+    document.querySelectorAll('.swatch').forEach(s => s.classList.toggle('active', s.dataset.pal === p));
+    persist();
+  }
+  function applyPrices(on) {
+    state.showPrices = on;
+    document.querySelectorAll('.service-price').forEach(el => el.style.display = on ? '' : 'none');
+    document.getElementById('tw-prices').classList.toggle('on', on);
+    persist();
+  }
+  function applyIG(on) {
+    state.showInstagramRail = on;
+    document.getElementById('ig').style.display = on ? '' : 'none';
+    document.getElementById('tw-ig').classList.toggle('on', on);
+    persist();
+  }
+  function persist() {
+    try {
+      window.parent.postMessage({ type: '__edit_mode_set_keys', edits: {
+        palette: state.palette,
+        heroStyle: state.heroStyle,
+        showPrices: state.showPrices,
+        showInstagramRail: state.showInstagramRail
+      }}, '*');
+    } catch(e) {}
+  }
+
+  // Init
+  applyPalette(state.palette);
+  applyPrices(state.showPrices);
+  applyIG(state.showInstagramRail);
+  document.querySelectorAll('.swatch').forEach(s => s.addEventListener('click', () => applyPalette(s.dataset.pal)));
+  document.getElementById('tw-prices').addEventListener('click', () => applyPrices(!state.showPrices));
+  document.getElementById('tw-ig').addEventListener('click', () => applyIG(!state.showInstagramRail));
+
+  // Tweaks toggle (from host toolbar)
+  window.addEventListener('message', (e) => {
+    if (!e.data) return;
+    if (e.data.type === '__activate_edit_mode') document.getElementById('tweaks').classList.add('open');
+    if (e.data.type === '__deactivate_edit_mode') document.getElementById('tweaks').classList.remove('open');
+  });
+  try { window.parent.postMessage({ type: '__edit_mode_available' }, '*'); } catch(e) {}
+
+  // FAQ toggling
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    q.addEventListener('click', () => {
+      const open = item.classList.toggle('open');
+      a.style.maxHeight = open ? a.scrollHeight + 'px' : '0';
+    });
+  });
+  // Open first FAQ by default
+  const first = document.querySelector('.faq-item');
+  if (first) { first.classList.add('open'); first.querySelector('.faq-a').style.maxHeight = first.querySelector('.faq-a').scrollHeight + 'px'; }
+
+  // Smooth scroll for anchors
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href');
+      if (id.length > 1) {
+        const t = document.querySelector(id);
+        if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 60, behavior: 'smooth' }); }
+      }
+    });
+  });
+</script>
+</body>
+</html>
