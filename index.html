@@ -3,10 +3,22 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Cafuné Alaciados by Mich</title>
+<title>Cafuné Alaciados por Michelle · Cabello sedoso, cuidado con cariño</title>
+<meta name="description" content="Salón especializado en alaciados progresivos, botox capilar y nanoplastia libres de formol en León, Gto. Resultados suaves y brillantes que duran meses." />
+
+<!-- Meta Tags de Redes Sociales (Open Graph & Twitter Cards) -->
+<meta property="og:title" content="Cafuné Alaciados por Michelle · Cabello sedoso, cuidado con cariño" />
+<meta property="og:description" content="Salón especializado en alaciados progresivos, botox capilar y nanoplastia libres de formol en León, Gto. Resultados brillantes." />
+<meta property="og:image" content="assets/logo.webp" />
+<meta property="og:url" content="https://oramirezcienega-ship-it.github.io/cafune-web/" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Figtree:wght@300;400;500;600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -14,6 +26,51 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-NJTPTCNQ');</script>
 <!-- End Google Tag Manager -->
+
+<!-- SEO Local: Schema de Negocio -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BeautySalon",
+  "name": "Cafuné Alaciados por Michelle",
+  "image": "assets/logo.webp",
+  "url": "https://oramirezcienega-ship-it.github.io/cafune-web/",
+  "telephone": "+524771868604",
+  "priceRange": "$$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Lago de Sayula 214, Col. San Antonio",
+    "addressLocality": "León",
+    "addressRegion": "Gto.",
+    "postalCode": "37328",
+    "addressCountry": "MX"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 21.1256119,
+    "longitude": -101.6234567
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ],
+    "opens": "09:00",
+    "closes": "19:00"
+  },
+  "sameAs": [
+    "https://www.instagram.com/cafune.alaciados/",
+    "https://www.facebook.com/profile.php?id=61568871392128",
+    "https://www.tiktok.com/@.cafun.alaciados"
+  ]
+}
+</script>
+
 <script>
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "palette": "cream",
@@ -716,6 +773,382 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   /* Utility fade-in */
   .fade-up { opacity: 0; transform: translateY(18px); transition: opacity .8s, transform .8s; }
   .fade-up.in { opacity: 1; transform: none; }
+
+  /* ---------- MENÚ HAMBURGUESA MÓVIL ---------- */
+  .nav-toggle {
+    display: none;
+    background: transparent;
+    border: 0;
+    padding: 10px;
+    cursor: pointer;
+    position: relative;
+    z-index: 101;
+  }
+  .nav-toggle-icon {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--ink);
+    position: relative;
+    transition: background .2s ease-in-out;
+  }
+  .nav-toggle-icon::before,
+  .nav-toggle-icon::after {
+    content: "";
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--ink);
+    position: absolute;
+    left: 0;
+    transition: transform .2s ease-in-out, top .2s ease-in-out;
+  }
+  .nav-toggle-icon::before { top: -6px; }
+  .nav-toggle-icon::after { top: 6px; }
+
+  /* Animación de abierto para el icono */
+  .nav-toggle.active .nav-toggle-icon {
+    background: transparent;
+  }
+  .nav-toggle.active .nav-toggle-icon::before {
+    top: 0;
+    transform: rotate(45deg);
+  }
+  .nav-toggle.active .nav-toggle-icon::after {
+    top: 0;
+    transform: rotate(-45deg);
+  }
+
+  /* ---------- BOTÓN FLOTANTE WHATSAPP (MÓVIL) ---------- */
+  .whatsapp-sticky {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 99;
+    background: #25D366;
+    color: #FFF;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: transform .2s, box-shadow .2s;
+    animation: stickyPulse 2s infinite;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .whatsapp-sticky:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(37, 211, 102, 0.5);
+  }
+  .whatsapp-sticky svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+  }
+  
+  @keyframes stickyPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+
+  /* Ocultar en escritorio */
+  @media (min-width: 821px) {
+    .whatsapp-sticky {
+      display: none !important;
+    }
+  }
+
+  /* Estilos responsivos adicionales */
+  @media (max-width: 820px) {
+    .nav-toggle {
+      display: block; /* Mostrar botón hamburguesa */
+    }
+    .nav-links {
+      display: flex !important;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 80%;
+      max-width: 320px;
+      height: 100vh;
+      background: var(--paper);
+      border-left: 1px solid var(--line);
+      padding: 100px 40px 40px;
+      gap: 28px;
+      z-index: 100;
+      transition: right .3s ease-in-out;
+      box-shadow: -10px 0 30px rgba(0,0,0,0.05);
+    }
+    .nav-links.active {
+      right: 0;
+    }
+    .nav-links a {
+      font-size: 18px;
+      font-weight: 500;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 12px;
+    }
+    .nav-cta {
+      display: none !important; /* Ocultar CTA del nav en móvil porque tenemos el sticky de WhatsApp */
+    }
+
+    /* Evitar desbordamiento por la cabecera de las secciones */
+    .section-head {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .section-head p {
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    /* Ajustes finos de espaciado en móviles pequeños */
+    .container { padding: 0 20px; }
+    
+    /* Convertir botón de WhatsApp en círculo en pantallas pequeñas para no tapar texto */
+    .whatsapp-sticky span {
+      display: none;
+    }
+    .whatsapp-sticky {
+      padding: 14px;
+      border-radius: 50%;
+      bottom: 20px;
+      right: 20px;
+    }
+    
+    /* Evitar desbordamiento y ajustar el footer */
+    footer {
+      padding-bottom: 100px;
+    }
+    .foot-grid {
+      grid-template-columns: 1fr !important;
+      gap: 30px;
+    }
+  }
+
+  /* Reset global de desbordamiento horizontal */
+  html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* ---------- SLIDER ANTES Y DESPUÉS ---------- */
+  .before-after-slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    cursor: ew-resize;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .before-after-slider img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+  }
+  .before-after-slider .img-before {
+    z-index: 1;
+    width: 100%;
+    /* Filtro para simular el "antes" opaco, con frizz o menos saturado */
+    filter: saturate(0.65) contrast(0.9) brightness(0.9) blur(0.5px);
+  }
+  .before-after-slider .img-after-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%; /* Porcentaje inicial */
+    height: 100%;
+    overflow: hidden;
+    z-index: 2;
+    transition: width 0.05s ease-out;
+  }
+  .before-after-slider .img-after-wrapper img {
+    width: 100%;
+    height: 100%;
+    /* Ajuste para que la imagen de arriba no se encoja cuando el wrapper cambie de ancho */
+    max-width: none;
+  }
+  
+  /* Barra y manija deslizante */
+  .before-after-slider .slider-bar {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    background: #FFF;
+    z-index: 3;
+    pointer-events: none;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    transition: left 0.05s ease-out;
+  }
+  .before-after-slider .slider-handle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 36px;
+    height: 36px;
+    background: #FFF;
+    border-radius: 50%;
+    z-index: 4;
+    pointer-events: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: bold;
+    transition: left 0.05s ease-out;
+    border: 1px solid var(--line);
+  }
+  .before-after-slider .slider-handle::before,
+  .before-after-slider .slider-handle::after {
+    content: "";
+    border: solid var(--ink);
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+  }
+  .before-after-slider .slider-handle::before {
+    transform: rotate(135deg);
+    margin-right: 2px;
+  }
+  .before-after-slider .slider-handle::after {
+    transform: rotate(-45deg);
+    margin-left: 2px;
+  }
+
+  /* Control deslizante nativo invisible para captar interacciones */
+  .before-after-slider .slider-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 5;
+    cursor: ew-resize;
+    margin: 0;
+  }
+  
+  /* Etiquetas "Antes" y "Después" */
+  .before-after-slider .slider-label {
+    position: absolute;
+    top: 14px;
+    background: rgba(42, 31, 26, 0.7);
+    color: #FFF;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    border-radius: 4px;
+    z-index: 3;
+    pointer-events: none;
+    font-weight: 500;
+  }
+  .before-after-slider .slider-label.label-before {
+    left: 14px;
+  }
+  .before-after-slider .slider-label.label-after {
+    right: 14px;
+  }
+
+  /* ---------- MODAL LIGHTBOX ---------- */
+  .lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(26, 19, 15, 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .lightbox.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    background: transparent;
+    border: 0;
+    color: #FFF;
+    font-size: 36px;
+    cursor: pointer;
+    z-index: 1002;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+  }
+  .lightbox-close:hover {
+    transform: scale(1.1);
+  }
+  .lightbox-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .lightbox-content img {
+    max-width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+  }
+  .lightbox.active .lightbox-content img {
+    transform: scale(1);
+  }
+  .lightbox-caption {
+    color: #FFF;
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    font-style: italic;
+    text-align: center;
+    letter-spacing: 0.02em;
+  }
+
+  /* Ajustar puntero en elementos de la galería que abren lightbox */
+  .tile:not(.t1):not(.t5) {
+    cursor: zoom-in;
+  }
+  .mich-portrait img {
+    cursor: zoom-in;
+  }
 </style>
 </head>
 <body data-palette="cream">
@@ -729,16 +1162,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <nav class="nav" data-screen-label="Nav">
   <div class="container nav-inner">
     <a href="#top" class="logo">
-      <img src="assets/logo.jpeg" alt="Cafuné Alaciados" class="logo-img" />
+      <img src="assets/logo.webp" alt="Cafuné Alaciados" class="logo-img" />
       <span class="sub">Alaciados by Michelle</span>
     </a>
-    <div class="nav-links">
+    <div class="nav-links" id="navLinks">
       <a href="#servicios">Servicios</a>
       <a href="#proceso">Proceso</a>
       <a href="#galeria">Galería</a>
       <a href="#mich">Sobre Mich</a>
       <a href="#faq">Preguntas</a>
     </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+      <span class="nav-toggle-icon"></span>
+    </button>
     <a class="nav-cta" href="#agenda">
       Agendar cita
       <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -782,8 +1218,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
     <div class="hero-visual">
-      <div class="hero-photo main"><img src="assets/Cafune%20Modelo%201.jpeg" alt="Foto — clienta · resultado" style="width:100%;height:100%;object-fit:cover;"></div>
-      <div class="hero-photo sub"><img src="assets/Cafune%20Modelo%201.jpeg" alt="Detalle" style="width:100%;height:100%;object-fit:cover;"></div>
+      <div class="hero-photo main"><img src="assets/Cafune Modelo 1.webp" alt="Foto — clienta · resultado" style="width:100%;height:100%;object-fit:cover;"></div>
+      <div class="hero-photo sub"><img src="assets/Cafune Modelo 1.webp" alt="Detalle" style="width:100%;height:100%;object-fit:cover;"></div>
       <div class="hero-stamp">
         <svg viewBox="0 0 110 110">
           <defs>
@@ -923,12 +1359,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p>Cabellos diferentes, un mismo resultado: brillo, suavidad y movimiento. Sin filtros.</p>
     </div>
     <div class="gallery-grid">
-      <div class="tile t1"><img src="assets/Cafune%20Modelo%201.jpeg" alt="Alaciado progresivo" style="width:100%;height:100%;object-fit:cover;"><span class="ba">Antes / Después</span><span class="cap">Alaciado progresivo · Paola</span></div>
-      <div class="tile t2"><img src="assets/Cafune%20Modelo%202.jpeg" alt="Botox capilar" style="width:100%;height:100%;object-fit:cover;"><span class="ba">Resultado</span><span class="cap">Botox capilar</span></div>
-      <div class="tile t3"><img src="assets/Cafune%20Modelo%203.jpeg" alt="Brillo natural" style="width:100%;height:100%;object-fit:cover;"><span class="ba">Detalle</span><span class="cap">Brillo natural</span></div>
-      <div class="tile t4"><img src="assets/Cafune%20Modelo%204.jpeg" alt="En el salón" style="width:100%;height:100%;object-fit:cover;"><span class="ba">Proceso</span><span class="cap">En el salón</span></div>
-      <div class="tile t5"><img src="assets/Cafune%20Modelo%205.jpeg" alt="Nanoplastia" style="width:100%;height:100%;object-fit:cover;"><span class="ba">Antes / Después</span><span class="cap">Nanoplastia · Dani</span></div>
-      <div class="tile t6"><img src="assets/Cafune%20Modelo%201.jpeg" alt="Hidratación profunda" style="width:100%;height:100%;object-fit:cover;"><span class="ba">Resultado</span><span class="cap">Hidratación profunda</span></div>
+      <div class="tile t1">
+        <div class="before-after-slider">
+          <img src="assets/Cafune Modelo 1.webp" class="img-before" alt="Antes - Alaciado progresivo" loading="lazy">
+          <div class="img-after-wrapper">
+            <img src="assets/Cafune Modelo 1.webp" class="img-after" alt="Después - Alaciado progresivo" loading="lazy">
+          </div>
+          <div class="slider-bar"></div>
+          <div class="slider-handle"></div>
+          <input type="range" min="0" max="100" value="50" class="slider-input" aria-label="Deslizar antes y después">
+          <span class="slider-label label-before">Antes</span>
+          <span class="slider-label label-after">Después</span>
+        </div>
+        <span class="cap">Alaciado progresivo · Paola</span>
+      </div>
+      <div class="tile t2"><img src="assets/Cafune Modelo 2.webp" alt="Botox capilar" style="width:100%;height:100%;object-fit:cover;" loading="lazy"><span class="ba">Resultado</span><span class="cap">Botox capilar</span></div>
+      <div class="tile t3"><img src="assets/Cafune Modelo 3.webp" alt="Brillo natural" style="width:100%;height:100%;object-fit:cover;" loading="lazy"><span class="ba">Detalle</span><span class="cap">Brillo natural</span></div>
+      <div class="tile t4"><img src="assets/Cafune Modelo 4.webp" alt="En el salón" style="width:100%;height:100%;object-fit:cover;" loading="lazy"><span class="ba">Proceso</span><span class="cap">En el salón</span></div>
+      <div class="tile t5">
+        <div class="before-after-slider">
+          <img src="assets/Cafune Modelo 5.webp" class="img-before" alt="Antes - Nanoplastia" loading="lazy">
+          <div class="img-after-wrapper">
+            <img src="assets/Cafune Modelo 5.webp" class="img-after" alt="Después - Nanoplastia" loading="lazy">
+          </div>
+          <div class="slider-bar"></div>
+          <div class="slider-handle"></div>
+          <input type="range" min="0" max="100" value="50" class="slider-input" aria-label="Deslizar antes y después">
+          <span class="slider-label label-before">Antes</span>
+          <span class="slider-label label-after">Después</span>
+        </div>
+        <span class="cap">Nanoplastia · Dani</span>
+      </div>
+      <div class="tile t6"><img src="assets/Cafune Modelo 1.webp" alt="Hidratación profunda" style="width:100%;height:100%;object-fit:cover;" loading="lazy"><span class="ba">Resultado</span><span class="cap">Hidratación profunda</span></div>
     </div>
   </div>
 </section>
@@ -937,7 +1399,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section id="mich" style="background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);" data-screen-label="06 Sobre Mich">
   <div class="container mich">
     <div class="mich-portrait">
-      <img src="assets/Cafune%20Modelo%201.jpeg" alt="Manos que escuchan el cabello — Michelle" style="width:100%;height:100%;object-fit:cover;">
+      <img src="assets/Cafune Modelo 1.webp" alt="Manos que escuchan el cabello — Michelle" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
       <div class="mich-sig">— Mich</div>
     </div>
     <div>
@@ -1103,7 +1565,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="container">
     <div class="foot-grid">
       <div class="foot-brand">
-        <img src="assets/logo.jpeg" alt="Cafuné Alaciados by Michelle" style="width:88px;height:88px;border-radius:999px;object-fit:cover;display:block;margin-bottom:14px;" />
+        <img src="assets/logo.webp" alt="Cafuné Alaciados by Michelle" style="width:88px;height:88px;border-radius:999px;object-fit:cover;display:block;margin-bottom:14px;" />
         <div class="mark">Cafuné</div>
         <p>Alaciados por Michelle. Cabello sedoso, cuidado con cariño.</p>
       </div>
@@ -1151,6 +1613,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </footer>
 
+<!-- BOTÓN FLOTANTE WHATSAPP -->
+<a href="https://wa.me/524771868604?text=Hola%20Mich%2C%20quiero%20agendar%20una%20cita%20en%20Cafun%C3%A9%20%E2%9C%A8" class="whatsapp-sticky" target="_blank" rel="noopener noreferrer">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.2s-.8 1-.9 1.2c-.2.2-.3.2-.6.1s-1.3-.5-2.4-1.5c-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5s-.7-1.7-1-2.3c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.3 5.1 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.5-.3zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.2-1.3c1.4.8 3.1 1.2 4.8 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
+  <span>Agendar por WhatsApp</span>
+</a>
+
+<!-- VISOR DE IMÁGENES (LIGHTBOX) -->
+<div id="lightbox" class="lightbox" aria-hidden="true">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar">&times;</button>
+  <div class="lightbox-content">
+    <img id="lightboxImg" src="" alt="Visualizador de imagen">
+    <div id="lightboxCaption" class="lightbox-caption"></div>
+  </div>
+</div>
+
 <!-- TWEAKS PANEL -->
 <div class="tweaks" id="tweaks">
   <h4>Tweaks</h4>
@@ -1183,6 +1660,111 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 
 <script>
+  // Silders de Antes y Después
+  document.querySelectorAll('.before-after-slider').forEach(slider => {
+    const input = slider.querySelector('.slider-input');
+    const afterWrapper = slider.querySelector('.img-after-wrapper');
+    const bar = slider.querySelector('.slider-bar');
+    const handle = slider.querySelector('.slider-handle');
+
+    function updateSlider(val) {
+      afterWrapper.style.width = `${val}%`;
+      bar.style.left = `${val}%`;
+      handle.style.left = `${val}%`;
+    }
+
+    if (input) {
+      // Evento input para arrastrar
+      input.addEventListener('input', (e) => {
+        updateSlider(e.target.value);
+      });
+      // Inicializar en 50%
+      updateSlider(50);
+    }
+  });
+
+  // Visor Lightbox
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCaption = document.getElementById('lightboxCaption');
+  const lightboxClose = document.getElementById('lightboxClose');
+
+  if (lightbox && lightboxImg && lightboxClose) {
+    // Buscar todas las imágenes de la galería (excepto las del slider de antes/después) y de la sección Mich
+    const imagesToExpand = [];
+    
+    // Fotos estáticas en la galería
+    document.querySelectorAll('.tile:not(.t1):not(.t5) img').forEach(img => imagesToExpand.push(img));
+    // Foto de Mich
+    document.querySelectorAll('.mich-portrait img').forEach(img => imagesToExpand.push(img));
+    // Fotos principales del Hero
+    document.querySelectorAll('.hero-photo img').forEach(img => imagesToExpand.push(img));
+
+    imagesToExpand.forEach(img => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', () => {
+        const src = img.getAttribute('src');
+        const alt = img.getAttribute('alt') || '';
+        
+        // Buscar el caption si es parte de una tarjeta de galería (.tile)
+        let captionText = alt;
+        const parentTile = img.closest('.tile');
+        if (parentTile) {
+          const capEl = parentTile.querySelector('.cap');
+          if (capEl) captionText = capEl.textContent;
+        }
+
+        lightboxImg.setAttribute('src', src);
+        lightboxCaption.textContent = captionText;
+        lightbox.classList.add('active');
+        lightbox.setAttribute('aria-hidden', 'false');
+      });
+    });
+
+    // Cerrar lightbox
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      lightbox.setAttribute('aria-hidden', 'true');
+      setTimeout(() => {
+        lightboxImg.setAttribute('src', '');
+        lightboxCaption.textContent = '';
+      }, 300); // Esperar que termine la animación
+    }
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    
+    // Cerrar al hacer clic en el fondo oscuro
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    // Cerrar con la tecla Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        closeLightbox();
+      }
+    });
+  }
+
+  // Mobile menu interactivity
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+
+    // Cerrar menú al hacer clic en un enlace
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navToggle.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
+  }
+
   // Tweaks state
   const state = { ...TWEAK_DEFAULTS };
 
