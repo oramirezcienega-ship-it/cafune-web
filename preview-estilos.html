@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cafuné · Comparativa de Estilos (Desktop & Mobile)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0C0B0A;
+      --card-bg: #161412;
+      --card-border: rgba(215, 168, 122, 0.22);
+      --accent: #D7A87A;
+      --text: #F6EBDD;
+      --text-muted: #A08B78;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      padding: 40px 24px 100px;
+      line-height: 1.6;
+    }
+    .header {
+      max-width: 1100px;
+      margin: 0 auto 36px;
+      text-align: center;
+    }
+    .badge {
+      display: inline-block;
+      padding: 6px 18px;
+      background: rgba(215, 168, 122, 0.15);
+      border: 1px solid var(--accent);
+      border-radius: 999px;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(34px, 5vw, 54px);
+      font-weight: 400;
+      color: #FFF;
+      margin-bottom: 14px;
+    }
+    h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .header p {
+      color: var(--text-muted);
+      font-size: 18px;
+      max-width: 720px;
+      margin: 0 auto 30px;
+    }
+
+    /* Selector de Vistas (Tabs) */
+    .view-switcher {
+      display: inline-flex;
+      background: #1C1916;
+      border: 1px solid var(--card-border);
+      padding: 6px;
+      border-radius: 999px;
+      gap: 8px;
+      margin-bottom: 50px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .view-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 10px 24px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .view-btn:hover { color: #FFF; }
+    .view-btn.active {
+      background: var(--accent);
+      color: #0E0C0A;
+      box-shadow: 0 4px 15px rgba(215, 168, 122, 0.4);
+    }
+
+    /* Contenedor Principal */
+    .grid {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 70px;
+    }
+    .style-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+    }
+    .card-header {
+      padding: 26px 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 100%);
+    }
+    .card-header h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 28px;
+      color: #FFF;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .card-header .num {
+      color: var(--accent);
+      font-size: 20px;
+    }
+    .tag {
+      font-size: 13px;
+      padding: 5px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+    }
+
+    /* Imagen Displays */
+    .img-display-area {
+      padding: 30px;
+      background: #0E0D0C;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    
+    .desktop-preview-box {
+      flex: 1.6;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      cursor: zoom-in;
+      position: relative;
+    }
+    .desktop-preview-box img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    .mobile-preview-box {
+      flex: 1;
+      max-width: 380px;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 3px solid rgba(215, 168, 122, 0.35);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.8), 0 0 25px rgba(215, 168, 122, 0.15);
+      cursor: zoom-in;
+      position: relative;
+      background: #000;
+    }
+    .mobile-preview-box img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .img-tag-pill {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(8px);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: #FFF;
+      font-weight: 600;
+      border: 1px solid rgba(255,255,255,0.2);
+      pointer-events: none;
+    }
+
+    /* Modos de vista condicionales */
+    body.show-desktop-only .mobile-preview-box { display: none !important; }
+    body.show-desktop-only .desktop-preview-box { flex: 1; }
+
+    body.show-mobile-only .desktop-preview-box { display: none !important; }
+    body.show-mobile-only .mobile-preview-box { max-width: 440px; margin: 0 auto; flex: none; }
+
+    .card-body {
+      padding: 32px 36px;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 40px;
+    }
+    @media (max-width: 850px) {
+      .card-body { grid-template-columns: 1fr; }
+      .img-display-area { flex-direction: column; padding: 20px; }
+      .mobile-preview-box { max-width: 320px; }
+    }
+    .card-desc h3 {
+      font-size: 15px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .card-desc p {
+      color: var(--text);
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
+    .palette-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .swatch {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+    .features-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .features-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 15px;
+      color: var(--text-muted);
+    }
+    .features-list li strong { color: #FFF; }
+    .features-list li span.dot { color: var(--accent); font-size: 18px; line-height: 1; }
+
+    /* Modal Zoom */
+    .lightbox {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      cursor: zoom-out;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox img {
+      max-width: 95vw;
+      max-height: 95vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 10px 50px rgba(0,0,0,0.9);
+    }
+  </style>
+</head>
+<body class="show-both">
+
+  <header class="header">
+    <div class="badge">Cafuné Alaciados · Propuesta de Rediseño</div>
+    <h1>Comparativa Desktop & <em>Mobile</em></h1>
+    <p>Elige qué vista deseas explorar o compáralas lado a lado. Haz clic en cualquier imagen para verla en pantalla completa.</p>
+
+    <!-- Switcher -->
+    <div class="view-switcher">
+      <button class="view-btn active" onclick="switchView('both', this)">
+        <span>⚡</span> Comparativa Lado a Lado
+      </button>
+      <button class="view-btn" onclick="switchView('mobile', this)">
+        <span>📱</span> Solo Mobile (Smartphone)
+      </button>
+      <button class="view-btn" onclick="switchView('desktop', this)">
+        <span>🖥️</span> Solo Desktop (Escritorio)
+      </button>
+    </div>
+  </header>
+
+  <main class="grid">
+
+    <!-- ESTILO 1 -->
+    <article class="style-card" id="estilo1">
+      <div class="card-header">
+        <h2><span class="num">01.</span> Haute Luxury · "Noir & Gold"</h2>
+        <span class="tag">Exclusividad & Ultra Alta Gama</span>
+      </div>
+      
+      <div class="img-display-area">
+        <!-- Desktop -->
+        <div class="desktop-preview-box" onclick="openZoom('assets/estilos/estilo1_haute_luxury.jpg')">
+          <div class="img-tag-pill">🖥️ Desktop</div>
+          <img src="assets/estilos/estilo1_haute_luxury.jpg" alt="Estilo Haute Luxury Desktop">
+        </div>
+        <!-- Mobile -->
+        <div class="mobile-preview-box" onclick="openZoom('assets/estilos/estilo1_mobile_luxury.jpg')">
+          <div class="img-tag-pill">📱 Mobile</div>
+          <img src="assets/estilos/estilo1_mobile_luxury.jpg" alt="Estilo Haute Luxury Mobile">
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="card-desc">
+          <h3>La Experiencia Mobile</h3>
+          <p>En pantallas móviles, el fondo oscuro y la iluminación dorada crean un impacto visual dramático. La tarjeta flotante tipo vidrio con el badge <strong>"0% FORMOL"</strong> y el botón dorado de <strong>"RESERVA CITA"</strong> quedan al alcance del pulgar, maximizando la conversión.</p>
+          <div class="palette-row">
+            <span style="font-size:13px; color:var(--text-muted);">Colores clave:</span>
+            <div class="swatch" style="background: #0E0C0A;" title="Obsidiana Fondo"></div>
+            <div class="swatch" style="background: #1A1816;" title="Grafito"></div>
+            <div class="swatch" style="background: #D7A87A;" title="Oro Champaña"></div>
+            <div class="swatch" style="background: #F6EBDD;" title="Marfil Tipografía"></div>
+          </div>
+        </div>
+        <div>
+          <ul class="features-list">
+            <li><span class="dot">✦</span> <div><strong>Botón CTA fijo:</strong> Reserva al instante en el CRM o WhatsApp.</div></li>
+            <li><span class="dot">✦</span> <div><strong>Menú minimalista:</strong> Acceso rápido con tres líneas doradas.</div></li>
+            <li><span class="dot">✦</span> <div><strong>Sensación:</strong> Exclusividad de salón de Polanco en el móvil.</div></li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- ESTILO 2 -->
+    <article class="style-card" id="estilo2">
+      <div class="card-header">
+        <h2><span class="num">02.</span> Clean Glow · "Rosé Pearl & Glass"</h2>
+        <span class="tag">Fresco, Luminoso & K-Beauty</span>
+      </div>
+
+      <div class="img-display-area">
+        <!-- Desktop -->
+        <div class="desktop-preview-box" onclick="openZoom('assets/estilos/estilo2_clean_glow.jpg')">
+          <div class="img-tag-pill">🖥️ Desktop</div>
+          <img src="assets/estilos/estilo2_clean_glow.jpg" alt="Estilo Clean Glow Desktop">
+        </div>
+        <!-- Mobile -->
+        <div class="mobile-preview-box" onclick="openZoom('assets/estilos/estilo2_mobile_clean.jpg')">
+          <div class="img-tag-pill">📱 Mobile</div>
+          <img src="assets/estilos/estilo2_mobile_clean.jpg" alt="Estilo Clean Glow Mobile">
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="card-desc">
+          <h3>La Experiencia Mobile</h3>
+          <p>Diseño inspirado en apps de belleza y spas de lujo en Seúl. Incorpora barra de navegación inferior tipo app (*Home, Servicios, Galería, Ubicación*), micro-tarjetas de servicios en carrusel horizontal con precio y fotos de clientas con testimonios reales.</p>
+          <div class="palette-row">
+            <span style="font-size:13px; color:var(--text-muted);">Colores clave:</span>
+            <div class="swatch" style="background: #FAF8F5;" title="Blanco Perla"></div>
+            <div class="swatch" style="background: #EEDCCE;" title="Crema Satinado"></div>
+            <div class="swatch" style="background: #D69F8E;" title="Rosa Cuarzo"></div>
+            <div class="swatch" style="background: #3A2E2B;" title="Café Texto"></div>
+          </div>
+        </div>
+        <div>
+          <ul class="features-list">
+            <li><span class="dot">✦</span> <div><strong>Navegación tipo App:</strong> Barra inferior con iconos táctiles.</div></li>
+            <li><span class="dot">✦</span> <div><strong>Carruseles táctiles:</strong> Desliza para explorar fotos y servicios.</div></li>
+            <li><span class="dot">✦</span> <div><strong>Sensación:</strong> Limpio, natural, orgánico y reconfortante.</div></li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- ESTILO 3 -->
+    <article class="style-card" id="estilo3">
+      <div class="card-header">
+        <h2><span class="num">03.</span> Warm Editorial Atelier · "Haute Couture"</h2>
+        <span class="tag">Editorial de Moda & Vanguardia</span>
+      </div>
+
+      <div class="img-display-area">
+        <!-- Desktop -->
+        <div class="desktop-preview-box" onclick="openZoom('assets/estilos/estilo3_warm_editorial.jpg')">
+          <div class="img-tag-pill">🖥️ Desktop</div>
+          <img src="assets/estilos/estilo3_warm_editorial.jpg" alt="Estilo Warm Editorial Desktop">
+        </div>
+        <!-- Mobile -->
+        <div class="mobile-preview-box" onclick="openZoom('assets/estilos/estilo3_mobile_editorial.jpg')">
+          <div class="img-tag-pill">📱 Mobile</div>
+          <img src="assets/estilos/estilo3_mobile_editorial.jpg" alt="Estilo Warm Editorial Mobile">
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="card-desc">
+          <h3>La Experiencia Mobile</h3>
+          <p>Sensación de revista editorial de alta costura directamente en el smartphone. Destaca el slider interactivo táctil de <strong>Antes y Después</strong> donde la usuaria desliza con el dedo para comparar el cabello con frizz vs el alaciado liso y brillante.</p>
+          <div class="palette-row">
+            <span style="font-size:13px; color:var(--text-muted);">Colores clave:</span>
+            <div class="swatch" style="background: #EFE7DE;" title="Lino Natural"></div>
+            <div class="swatch" style="background: #A87C58;" title="Bronce Cálido"></div>
+            <div class="swatch" style="background: #2C2019;" title="Moca Profundo"></div>
+            <div class="swatch" style="background: #FFFFFF;" title="Blanco Puro"></div>
+          </div>
+        </div>
+        <div>
+          <ul class="features-list">
+            <li><span class="dot">✦</span> <div><strong>Slider Antes/Después táctil:</strong> Comparación interactiva en pantalla completa.</div></li>
+            <li><span class="dot">✦</span> <div><strong>Tipografía de impacto:</strong> Titulares monumentales adaptados a móvil.</div></li>
+            <li><span class="dot">✦</span> <div><strong>Sensación:</strong> Moda, exclusividad artesanal y calidez humana.</div></li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- LIGHTBOX ZOOM -->
+  <div class="lightbox" id="lightbox" onclick="closeZoom()">
+    <img id="lightboxImg" src="" alt="Zoom">
+  </div>
+
+  <script>
+    function openZoom(src) {
+      document.getElementById('lightboxImg').src = src;
+      document.getElementById('lightbox').classList.add('active');
+    }
+    function closeZoom() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+    function switchView(viewMode, btnEl) {
+      document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+      btnEl.classList.add('active');
+
+      document.body.className = '';
+      if (viewMode === 'desktop') {
+        document.body.classList.add('show-desktop-only');
+      } else if (viewMode === 'mobile') {
+        document.body.classList.add('show-mobile-only');
+      } else {
+        document.body.classList.add('show-both');
+      }
+    }
+  </script>
+</body>
+</html>
